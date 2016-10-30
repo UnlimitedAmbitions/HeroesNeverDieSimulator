@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour {
         target.GetComponent<Target>().RemoveSoul();
         target.GetComponent<Target>().Revive();
 
-        //ActivateEndUI();
+        ActivateEndUI();
     }
 
     public void ImDead(){
