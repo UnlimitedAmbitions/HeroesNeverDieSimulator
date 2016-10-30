@@ -14,7 +14,6 @@ public class UpdateStats : MonoBehaviour {
         time3.text = ""+PlayerPrefs.GetFloat("TimeWaited3").ToString("F2");
         time4.text = ""+PlayerPrefs.GetFloat("TimeWaited4").ToString("F2");
         time5.text = ""+PlayerPrefs.GetFloat("TimeWaited5").ToString("F2");
-        time6.text = ""+PlayerPrefs.GetFloat("TimeWaited6").ToString("F2");
         kill.text = ""+PlayerPrefs.GetInt("TotalRevived");
         death.text = ""+PlayerPrefs.GetInt("TotalDeath");
         games.text = ""+PlayerPrefs.GetInt("GamesPlayed");
