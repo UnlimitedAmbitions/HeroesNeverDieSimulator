@@ -414,7 +414,7 @@ MonoBehaviour:
   allHPrates: []
   startingHP: 100
   respawnHPrate: 1
-  startingRespawnHP: 5
+  startingRespawnHP: 10
   totalHP: 96000000c8000000fa000000f4010000
   isDead: 0
   isRespawned: 0
@@ -2268,7 +2268,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -3
   m_TargetDisplay: 0
 --- !u!224 &224000012093366244
 RectTransform:
