@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
     [Header("UI")]
     //UI
     public Button replayBtn, menuBtn;
-    public GameObject HP, Reaction, Revives;
+    public GameObject HP, Reaction, Revives, UltSymbol;
     public Text HPCount, reactionCount, reviveCount;
 
     [Header("Audio")]
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour {
         //HP.gameObject.SetActive(false);
         Reaction.gameObject.SetActive(false);
         Revives.gameObject.SetActive(false);
-
+        UltSymbol.gameObject.SetActive(true);
         instance = this;
         gameStarted = false;
         fired = false;
@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour {
         if(gameStarted && Input.GetButtonDown("Fire1") && !fired){
             fired = true;
             Debug.Log("REZ");
+            UltSymbol.gameObject.SetActive(false);
             mercyHandAnimator.SetTrigger("Rez");
             mercyStaffAnimator.SetTrigger("HideStaff");
             rezSource.clip = rezEffect;

@@ -7,6 +7,7 @@ public class Target : MonoBehaviour {
     public GameObject soul, respawnable;
     public Sprite[] characters;
     public Image currentChar;
+    public ParticleSystem lightParticle;
    // public Image circle;
 
     public bool healerMode;
@@ -90,6 +91,7 @@ public class Target : MonoBehaviour {
 
     public void Revive() {
         currentChar.gameObject.SetActive(true);
+        lightParticle.Play();
     }
 
     
