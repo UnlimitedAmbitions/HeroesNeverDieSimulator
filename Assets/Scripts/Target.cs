@@ -6,7 +6,7 @@ public class Target : MonoBehaviour {
 
     public GameObject soul, respawnable;
     public Sprite[] characters;
-    public Image currentChar;
+    public Image currentChar, respawnableProgressBar;
     public ParticleSystem lightParticle;
    // public Image circle;
 
@@ -20,7 +20,7 @@ public class Target : MonoBehaviour {
     public float startingRespawnHP;
     public int[] totalHP;
 
-    public bool isDead;
+    public bool isDead = false;
     public bool isRespawned;
     private float HP;
     private float respawnHP;
@@ -31,7 +31,6 @@ public class Target : MonoBehaviour {
         respawnable.gameObject.SetActive(false);
         //HP = startingHP;
         respawnHP = startingRespawnHP;
-        isDead = false;
         isRespawned = false;
         //HPrate = allHPrates[Mathf.FloorToInt(Random.Range(0, allHPrates.Length-1))];
         HP = totalHP[Mathf.FloorToInt(Random.Range(0, totalHP.Length-1))];
@@ -46,21 +45,22 @@ public class Target : MonoBehaviour {
 
         if (!isDead)
         {
-            if(Random.Range(-10, 100) < 0)
+            if(Random.Range(-50, 100) < 0)
             {
                 removeHP();
             }
             if (HP <= 0f) {
-                isDead = true;
-                soul.SetActive(true);
-                respawnable.SetActive(true);
-                currentChar.gameObject.SetActive(false);
+                isDead = true;     
             }
         }
 
         if (isDead && !isRespawned) {
+            soul.SetActive(true);
+            respawnable.SetActive(true);
+            currentChar.gameObject.SetActive(false);
             respawnHP -= respawnHPrate * Time.deltaTime;
-            if (respawnHP <= 0f) {isRespawned = true; soul.SetActive(false); respawnable.SetActive(false); Debug.Log("target expired");}
+            respawnableProgressBar.fillAmount = Mathf.Min(1f - respawnHP/startingRespawnHP, 1f);
+            if (respawnHP <= 0f) {isRespawned = true; soul.SetActive(false); respawnable.SetActive(false);}
         }
     }
 
@@ -68,10 +68,10 @@ public class Target : MonoBehaviour {
     {
         float minDamage = 0;
 
-        if (healerMode) minDamage = (startingHP / 6);
+        //if (healerMode) minDamage = (startingHP / 6);
 
         float damageDone;
-        damageDone = Random.Range(minDamage, startingHP);
+        damageDone = Random.Range(minDamage, startingHP/25f);
         HP -= damageDone;
     }
 

@@ -175,7 +175,8 @@ public class GameManager : MonoBehaviour {
         targets.Add(newTarget);
 
         float isDeadProb = Random.Range(0f, 1f);
-        if(isDeadProb > probabilityStartDead) {
+        if(isDeadProb < probabilityStartDead) {
+            Debug.Log("one random death at start");
             newTarget.GetComponent<Target>().isDead = true;
         }
 
@@ -211,7 +212,7 @@ public class GameManager : MonoBehaviour {
         // update stats
         //if(prevRemainingHp < remainingHp) PlayerPrefs.SetInt("TotalDeath", remainingHp);
        // if(prevDamageDone < damageDone) PlayerPrefs.SetFloat("DamageDone", damageDone);
-        if(prevTimeWaited < timeWaited) PlayerPrefs.SetFloat("TimeWaited"+revived, timeWaited);
+        if((prevTimeWaited < timeWaited) || prevTimeWaited == 0f) PlayerPrefs.SetFloat("TimeWaited"+revived, timeWaited);
         PlayerPrefs.SetInt("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed") + 1);
         PlayerPrefs.SetInt("TotalRevived", PlayerPrefs.GetInt("TotalRevived") + 1);
         if(remainingHp <= 0) PlayerPrefs.SetInt("TotalDeath", PlayerPrefs.GetInt("TotalDeath") + 1);
