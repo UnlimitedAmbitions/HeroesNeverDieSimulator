@@ -4,21 +4,21 @@ using System.Collections;
 
 public class MainMenuCameraTurn : MonoBehaviour {
 	public Animator camAnim;
-	public AudioSource gunshot;
+	public AudioSource magic;
 
     public void StartGame()
     {
         SceneManager.LoadScene("game");
-        gunshot.Play();
+        magic.Play();
     }
 	
 	public void ToStats(){
 		camAnim.SetTrigger("MainToStats");
-        gunshot.Play();
+        magic.Play();
 	}
 
 	public void ToMainMenu(){
 		camAnim.SetTrigger("StatsToMain");
-        gunshot.Play();
+        magic.Play();
 	}
 }
