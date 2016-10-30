@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
+using GoogleMobileAds.Api;
 
 public class GameManager : MonoBehaviour {
 
@@ -48,8 +49,6 @@ public class GameManager : MonoBehaviour {
     public bool gameStarted;
     public float probabilityStartDead = 0.5f;
 
-    //private int killed;
-    private int remainingHp;
     //private float damageDone;
     private float timeWaited;
 
@@ -58,6 +57,8 @@ public class GameManager : MonoBehaviour {
     private int nbTargets;
 
     private int nbRevivables;
+
+    private BannerView bannerView;
 
     //private int destroyTargetCount;
 
@@ -79,7 +80,6 @@ public class GameManager : MonoBehaviour {
         gameStarted = false;
         fired = false;
         //killed = 0;
-        remainingHp = 0;
         //destroyTargetCount = 0;
         //damageDone = 0f;
         timeWaited = 0f;
@@ -91,7 +91,9 @@ public class GameManager : MonoBehaviour {
         backgroundPlane.GetComponent<MeshRenderer>().material = allBackgrounds[Mathf.FloorToInt(Random.Range(0, allBackgrounds.Length))];
 
         // start game after delay
-        Invoke("StartGame", startDelay);      
+        Invoke("StartGame", startDelay);
+        RequestBanner();
+        bannerView.Hide();    
 	}
 	
 	// Update is called once per frame
@@ -163,10 +165,12 @@ public class GameManager : MonoBehaviour {
 
     public void RestartGame(){
         SceneManager.LoadScene("game");
+        bannerView.Destroy();
     }
 
     public void ReturnToMenu(){
         SceneManager.LoadScene("MainMenu");
+        bannerView.Destroy();
     }
 
     private void RandomizeTargets()
@@ -225,12 +229,13 @@ public class GameManager : MonoBehaviour {
         if((prevTimeWaited < timeWaited) || prevTimeWaited == 0f) PlayerPrefs.SetFloat("TimeWaited"+revived, timeWaited);
         PlayerPrefs.SetInt("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed") + 1);
         PlayerPrefs.SetInt("TotalRevived", PlayerPrefs.GetInt("TotalRevived") + 1);
-        if(remainingHp <= 0) PlayerPrefs.SetInt("TotalDeath", PlayerPrefs.GetInt("TotalDeath") + 1);
+        if(playerScript.hp <= 0) PlayerPrefs.SetInt("TotalDeath", PlayerPrefs.GetInt("TotalDeath") + 1);
 
     }
 
     private void ActivateEndUI(){
         //dmgCount.text = "" + damageDone.ToString("F0");
+        bannerView.Show();
         reactionCount.text = "" + timeWaited.ToString("F2");
         reviveCount.text = "" + revived;
 
@@ -254,5 +259,16 @@ public class GameManager : MonoBehaviour {
             }
         }
         return count;
+    }
+
+    private void RequestBanner(){
+        string adUnitId = "ca-app-pub-6435649048408849/2811439414";
+
+        // Create a 320x50 banner at the top of the screen.
+        bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Top);
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Load the banner with the request.
+        bannerView.LoadAd(request);
     }
 }
