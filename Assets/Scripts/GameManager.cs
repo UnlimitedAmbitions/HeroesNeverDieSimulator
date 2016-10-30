@@ -101,16 +101,17 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         // timer
         nbRevivables = CountDead();
-        if( CountExpired() == targets.Count())
-        {
-            EndGame();
-        }
+        
 
         if(gameStarted) {
             timeWaited += Time.deltaTime;
             HPCount.text = "" + playerScript.hp;
             teammateDownIndicator.SetActive((nbRevivables > 0) ? true : false);
             teammateDownText.text = nbRevivables.ToString();
+            if( CountExpired() == targets.Count())
+            {
+                EndGame();
+            }
         }
 
         // logic for firing
@@ -238,6 +239,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void ActivateEndUI(){
+        Debug.Log("EndUI");
         //dmgCount.text = "" + damageDone.ToString("F0");
         bannerView.Show();
         reactionCount.text = "" + timeWaited.ToString("F2");
