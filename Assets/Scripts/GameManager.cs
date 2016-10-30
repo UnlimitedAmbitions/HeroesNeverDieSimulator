@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour {
 
     private int nbTargets;
 
+    private int nbRevivables;
+
     //private int destroyTargetCount;
 
 	// Use this for initialization
@@ -78,6 +80,7 @@ public class GameManager : MonoBehaviour {
         //destroyTargetCount = 0;
         //damageDone = 0f;
         timeWaited = 0f;
+        nbRevivables = 0;
 
 	    targets = new List<GameObject>();
 
@@ -95,8 +98,10 @@ public class GameManager : MonoBehaviour {
             HPCount.text = "" + playerScript.hp;
         }
 
+        nbRevivables = CountDead();
+
         // logic for firing
-        if(gameStarted && Input.GetButtonDown("Fire1") && !fired){
+        if(gameStarted && Input.GetButtonDown("Fire1") && !fired && nbRevivables > 0){
             fired = true;
             Debug.Log("REZ");
             UltSymbol.gameObject.SetActive(false);
@@ -225,5 +230,18 @@ public class GameManager : MonoBehaviour {
         Reaction.gameObject.SetActive(true);
         Revives.gameObject.SetActive(true);
 
+    }
+    private int CountDead()
+    {
+        int count = 0;
+        foreach(GameObject target in targets) {
+            bool isDead = target.GetComponent<Target>().IsDead();
+            bool isRespawned = target.GetComponent<Target>().isRespawned;
+
+            if(isDead && !isRespawned){
+                count++;
+            }
+        }
+        return count;
     }
 }
