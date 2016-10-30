@@ -746,6 +746,7 @@ GameObject:
   - 82: {fileID: 735841176}
   - 82: {fileID: 735841177}
   - 114: {fileID: 735841178}
+  - 82: {fileID: 735841179}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -791,10 +792,10 @@ MonoBehaviour:
   reviveCount: {fileID: 1833485999}
   quoteSource: {fileID: 735841176}
   rezSource: {fileID: 735841177}
-  deathScream: {fileID: 0}
+  deathScream: {fileID: 735841179}
   heroesNeverDie: {fileID: 8300000, guid: 67c0c21e41c58e440ac7c3128c2bb784, type: 3}
-  rezEffect: {fileID: 8300000, guid: 90048ec0db0ad224d9c23b132585e4f5, type: 3}
-  deadScream: {fileID: 0}
+  rezEffect: {fileID: 8300000, guid: 1da1a7cc616f95f40972922c282e0eb3, type: 3}
+  deadScream: {fileID: 8300000, guid: fb5b55fc465074f4bb0dc73a9bf94da2, type: 3}
   totalAnimationTime: 0
   betweenShotsTime: 0.125
   mercyHandAnimator: {fileID: 136452072}
@@ -897,7 +898,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 90048ec0db0ad224d9c23b132585e4f5, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1da1a7cc616f95f40972922c282e0eb3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -976,6 +977,80 @@ MonoBehaviour:
   hp: 0
   decreaseHPThreshold: 95
   damageShots: 0a000000190000003200000000000000
+--- !u!82 &735841179
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 735841173}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: fb5b55fc465074f4bb0dc73a9bf94da2, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &758570866
 GameObject:
   m_ObjectHideFlags: 0
