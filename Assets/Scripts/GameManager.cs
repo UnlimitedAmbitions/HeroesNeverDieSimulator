@@ -128,6 +128,8 @@ public class GameManager : MonoBehaviour {
     private void reviveTarget(GameObject target){
         
         //reveive animation
+        target.GetComponent<Target>().RemoveSoul();
+        target.GetComponent<Target>().Revive();
 
         //ActivateEndUI();
     }

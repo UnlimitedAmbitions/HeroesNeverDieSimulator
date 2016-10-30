@@ -4,8 +4,10 @@ using System.Collections;
 
 public class Target : MonoBehaviour {
 
-    public GameObject target, point;
-    public Image circle;
+    public GameObject soul, respawnable;
+    public Sprite[] characters;
+    public Image currentChar;
+   // public Image circle;
 
     public bool healerMode;
 
@@ -24,14 +26,16 @@ public class Target : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        target.gameObject.SetActive(false);
-        point.gameObject.SetActive(true);
+        soul.gameObject.SetActive(false);
+        respawnable.gameObject.SetActive(false);
         //HP = startingHP;
         respawnHP = startingRespawnHP;
         isDead = false;
         isRespawned = false;
         //HPrate = allHPrates[Mathf.FloorToInt(Random.Range(0, allHPrates.Length-1))];
         HP = totalHP[Mathf.FloorToInt(Random.Range(0, totalHP.Length-1))];
+        int index = Mathf.FloorToInt(Random.Range(0, characters.Length));
+        currentChar.sprite = characters[index];
  
     }
 	
@@ -45,12 +49,17 @@ public class Target : MonoBehaviour {
             {
                 removeHP();
             }
-            if (HP <= 0f) {isDead = true; Debug.Log("target died");}
+            if (HP <= 0f) {
+                isDead = true;
+                soul.SetActive(true);
+                respawnable.SetActive(true);
+                currentChar.gameObject.SetActive(false);
+            }
         }
 
         if (isDead && !isRespawned) {
             respawnHP -= respawnHPrate * Time.deltaTime;
-            if (respawnHP <= 0f) {isRespawned = true; Debug.Log("target expired");}
+            if (respawnHP <= 0f) {isRespawned = true; soul.SetActive(false); respawnable.SetActive(false); Debug.Log("target expired");}
         }
     }
 
@@ -73,14 +82,15 @@ public class Target : MonoBehaviour {
         return isDead;
     }
 
-    public void HideSkull() {
-        this.gameObject.SetActive(false);
+    public void RemoveSoul()
+    {
+        soul.gameObject.SetActive(false);
+        respawnable.gameObject.SetActive(false);
     }
 
-    private void setSkull() {
-        // set skull
-        target.gameObject.SetActive(true);
-        point.gameObject.SetActive(false);
-        Debug.Log("target set skull");
+    public void Revive() {
+        currentChar.gameObject.SetActive(true);
     }
+
+    
 }
