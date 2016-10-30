@@ -71,7 +71,7 @@ public class Target : MonoBehaviour {
         //if (healerMode) minDamage = (startingHP / 6);
 
         float damageDone;
-        damageDone = Random.Range(minDamage, startingHP/25f);
+        damageDone = Random.Range(minDamage, startingHP/33f);
         HP -= damageDone;
     }
 

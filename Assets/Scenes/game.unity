@@ -767,7 +767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPrefab: {fileID: 1000012907397472, guid: 9e6ad2d72bd68704b816896e9938792a,
     type: 2}
-  minNbTargets: 1
+  minNbTargets: 2
   maxNbTargets: 5
   teammateDownIndicator: {fileID: 1213015634}
   teammateDownText: {fileID: 163383585}
@@ -780,7 +780,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 68b342c5b1393cf4f9603db4d0ab9474, type: 2}
   lowerLeft: {fileID: 1210572125}
   upperRight: {fileID: 989377374}
-  startDelay: 1
+  startDelay: 0.5
   replayBtn: {fileID: 1394590105}
   menuBtn: {fileID: 1786962902}
   HP: {fileID: 1116373974}
@@ -975,7 +975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
-  decreaseHPThreshold: 97
+  decreaseHPThreshold: 98
   damageShots: 0a000000190000003200000000000000
 --- !u!82 &735841179
 AudioSource:
