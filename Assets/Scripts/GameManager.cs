@@ -155,8 +155,8 @@ public class GameManager : MonoBehaviour {
             //o.GetComponent<Target>().HideSkull();
        //}
 
-        //deathScream.clip = deadScream;
-        //deathScream.PlayDelayed(0.0f);
+        deathScream.clip = deadScream;
+        deathScream.PlayDelayed(0.0f);
         EndGame();
         ActivateEndUI();
     }
