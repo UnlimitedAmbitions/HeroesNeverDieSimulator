@@ -310,16 +310,15 @@ MonoBehaviour:
   target: {fileID: 1000013701310996}
   point: {fileID: 1000010044353644}
   circle: {fileID: 114000011159265324}
-  scalingRate: 0
-  allScalingRates:
-  - 0.35
-  - 0.5
-  - 0.75
-  - 0.8
-  startingScale: 1.6
-  consideredDeathScale: 0.6
+  healerMode: 0
+  HPrate: 0
+  allHPrates: []
+  startingHP: 100
+  respawnHPrate: 1
+  startingRespawnHP: 10
   totalHP: 96000000c8000000fa000000f4010000
-  HP: 0
+  isDead: 0
+  isRespawned: 0
 --- !u!135 &135000012704030948
 SphereCollider:
   m_ObjectHideFlags: 1

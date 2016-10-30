@@ -17,8 +17,8 @@ public class Target : MonoBehaviour {
     public float startingRespawnHP;
     public int[] totalHP;
 
-    private bool isDead;
-    private bool isRespawned;
+    public bool isDead;
+    public bool isRespawned;
     private float HP;
     private float respawnHP;
 
@@ -26,12 +26,12 @@ public class Target : MonoBehaviour {
 	void Start () {
         target.gameObject.SetActive(false);
         point.gameObject.SetActive(true);
-        HP = startingHP;
+        //HP = startingHP;
         respawnHP = startingRespawnHP;
         isDead = false;
         isRespawned = false;
-        HPrate = allHPrates[Mathf.FloorToInt(Random.Range(0, allHPrates.Length))];
-        HP = totalHP[Mathf.FloorToInt(Random.Range(0, totalHP.Length))];
+        //HPrate = allHPrates[Mathf.FloorToInt(Random.Range(0, allHPrates.Length-1))];
+        HP = totalHP[Mathf.FloorToInt(Random.Range(0, totalHP.Length-1))];
  
     }
 	
@@ -45,12 +45,12 @@ public class Target : MonoBehaviour {
             {
                 removeHP();
             }
-            if (HP <= 0f) isDead = true;
+            if (HP <= 0f) {isDead = true; Debug.Log("target died");}
         }
 
         if (isDead && !isRespawned) {
             respawnHP -= respawnHPrate * Time.deltaTime;
-            if (respawnHP <= 0f) isRespawned = true;
+            if (respawnHP <= 0f) {isRespawned = true; Debug.Log("target expired");}
         }
     }
 
