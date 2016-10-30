@@ -784,7 +784,7 @@ MonoBehaviour:
   menuBtn: {fileID: 1786962902}
   HP: {fileID: 1116373974}
   Reaction: {fileID: 597476581}
-  Revives: {fileID: 258723200}
+  Revives: {fileID: 911240255}
   UltSymbol: {fileID: 1080282518}
   HPCount: {fileID: 758570868}
   reactionCount: {fileID: 1624329034}
