@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour {
 
     public GameObject targetPrefab;
     public int minNbTargets, maxNbTargets;
+    
+    public GameObject teammateDownIndicator;
+    public Text teammateDownText;
 
     public Player playerScript;
 
@@ -29,8 +32,8 @@ public class GameManager : MonoBehaviour {
     public Text HPCount, reactionCount, reviveCount;
 
     [Header("Audio")]
-    public AudioSource quoteSource, rezSource;
-    public AudioClip heroesNeverDie, rezEffect;
+    public AudioSource quoteSource, rezSource, deathScream;
+    public AudioClip heroesNeverDie, rezEffect, deadScream;
 
     [Header("EndGame")]
 
@@ -81,6 +84,7 @@ public class GameManager : MonoBehaviour {
         //damageDone = 0f;
         timeWaited = 0f;
         nbRevivables = 0;
+        teammateDownIndicator.SetActive(false);
 
 	    targets = new List<GameObject>();
 
@@ -93,12 +97,14 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // timer
+        nbRevivables = CountDead();
+
         if(gameStarted) {
             timeWaited += Time.deltaTime;
             HPCount.text = "" + playerScript.hp;
+            teammateDownIndicator.SetActive((nbRevivables > 0) ? true : false);
+            teammateDownText.text = nbRevivables.ToString();
         }
-
-        nbRevivables = CountDead();
 
         // logic for firing
         if(gameStarted && Input.GetButtonDown("Fire1") && !fired && nbRevivables > 0){
@@ -127,6 +133,7 @@ public class GameManager : MonoBehaviour {
     private void EndGame() {
         Debug.Log("end game");
         gameStarted = false;
+        teammateDownIndicator.SetActive(false);
         
         StatAssessment();
         
@@ -147,6 +154,9 @@ public class GameManager : MonoBehaviour {
         //foreach(GameObject o in targets) {
             //o.GetComponent<Target>().HideSkull();
        //}
+
+        //deathScream.clip = deadScream;
+        //deathScream.PlayDelayed(0.0f);
         EndGame();
         ActivateEndUI();
     }
