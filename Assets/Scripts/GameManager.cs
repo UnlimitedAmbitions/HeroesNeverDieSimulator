@@ -228,7 +228,7 @@ public class GameManager : MonoBehaviour {
        // if(prevDamageDone < damageDone) PlayerPrefs.SetFloat("DamageDone", damageDone);
         if((prevTimeWaited < timeWaited) || prevTimeWaited == 0f) PlayerPrefs.SetFloat("TimeWaited"+revived, timeWaited);
         PlayerPrefs.SetInt("GamesPlayed", PlayerPrefs.GetInt("GamesPlayed") + 1);
-        PlayerPrefs.SetInt("TotalRevived", PlayerPrefs.GetInt("TotalRevived") + 1);
+        PlayerPrefs.SetInt("TotalRevived", PlayerPrefs.GetInt("TotalRevived") + revived);
         if(playerScript.hp <= 0) PlayerPrefs.SetInt("TotalDeath", PlayerPrefs.GetInt("TotalDeath") + 1);
 
     }
