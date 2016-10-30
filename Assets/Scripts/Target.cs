@@ -7,50 +7,70 @@ public class Target : MonoBehaviour {
     public GameObject target, point;
     public Image circle;
 
-    public float scalingRate;
-    public float[] allScalingRates;
-    public float startingScale;
-    public float consideredDeathScale;
-    public int[] totalHP;
-    public int HP;
+    public bool healerMode;
 
-    private bool wouldDie;
-    private float scale;
+    public float HPrate;
+    public float[] allHPrates;
+    public float startingHP;
+
+    public float respawnHPrate;
+    public float startingRespawnHP;
+    public int[] totalHP;
+
+    private bool isDead;
+    private bool isRespawned;
+    private float HP;
+    private float respawnHP;
 
 	// Use this for initialization
 	void Start () {
         target.gameObject.SetActive(false);
         point.gameObject.SetActive(true);
-        scale = startingScale;
-        circle.transform.localScale = new Vector3(scale, scale, scale);
-        wouldDie = false;
-        scalingRate = allScalingRates[Mathf.FloorToInt(Random.Range(0, allScalingRates.Length))];
+        HP = startingHP;
+        respawnHP = startingRespawnHP;
+        isDead = false;
+        isRespawned = false;
+        HPrate = allHPrates[Mathf.FloorToInt(Random.Range(0, allHPrates.Length))];
         HP = totalHP[Mathf.FloorToInt(Random.Range(0, totalHP.Length))];
-	
-	}
+ 
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if(wouldDie || !GameManager.instance.gameStarted) return;
+        if(!GameManager.instance.gameStarted) return;
 
-        scale -= scalingRate*Time.deltaTime;
-        if(scale < 0f) scale = 0f;
-
-        circle.transform.localScale = new Vector3(scale, scale, scale);
-
-        if (scale <= consideredDeathScale) {
-            wouldDie = true;
-            setSkull();
+        if (!isDead)
+        {
+            if(Random.Range(-10, 100) < 0)
+            {
+                removeHP();
+            }
+            if (HP <= 0f) isDead = true;
         }
-	
-	}
+
+        if (isDead && !isRespawned) {
+            respawnHP -= respawnHPrate * Time.deltaTime;
+            if (respawnHP <= 0f) isRespawned = true;
+        }
+    }
+
+    private void removeHP()
+    {
+        float minDamage = 0;
+
+        if (healerMode) minDamage = (startingHP / 6);
+
+        float damageDone;
+        damageDone = Random.Range(minDamage, startingHP);
+        HP -= damageDone;
+    }
 
     public float GetScale() {
-        return scale;
+        return HP;
     }
 
     public bool IsDead() {
-        return wouldDie;
+        return isDead;
     }
 
     public void HideSkull() {
