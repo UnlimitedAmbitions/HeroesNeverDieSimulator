@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour {
     public float totalAnimationTime;
     public float betweenShotsTime;
     public Animator mercyHandAnimator;
+    public Animator mercyStaffAnimator;
 
     private List<GameObject> targets;
     private bool fired;
@@ -99,6 +100,7 @@ public class GameManager : MonoBehaviour {
             fired = true;
             Debug.Log("REZ");
             mercyHandAnimator.SetTrigger("Rez");
+            mercyStaffAnimator.SetTrigger("HideStaff");
             rezSource.clip = rezEffect;
             rezSource.Play();
             quoteSource.clip = heroesNeverDie;
