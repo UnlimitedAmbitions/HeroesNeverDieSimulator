@@ -404,17 +404,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ac49a80e725798c43850150be8883e84, type: 3}
   - {fileID: 21300000, guid: 1f643aa8c3546f34b9b9e42c887b9704, type: 3}
   - {fileID: 21300000, guid: 46129a0b0306fd9469ccce99edadd3db, type: 3}
-  - {fileID: 21300000, guid: 24da1d80321b2274ea02da29e8e6718f, type: 3}
   - {fileID: 21300000, guid: 80017b2983cf6614ebc0f97f27e14840, type: 3}
+  - {fileID: 21300000, guid: 24da1d80321b2274ea02da29e8e6718f, type: 3}
   currentChar: {fileID: 114000011542729412}
-  respawnableProgressBar: {fileID: 0}
+  respawnableProgressBar: {fileID: 114000010042150296}
   lightParticle: {fileID: 198000010270236978}
   healerMode: 0
   HPrate: 0
   allHPrates: []
   startingHP: 100
   respawnHPrate: 1
-  startingRespawnHP: 8
+  startingRespawnHP: 5
   totalHP: 96000000c8000000fa000000f4010000
   isDead: 0
   isRespawned: 0
