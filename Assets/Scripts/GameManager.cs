@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using GoogleMobileAds.Api;
@@ -100,6 +101,10 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         // timer
         nbRevivables = CountDead();
+        if( CountExpired() == targets.Count())
+        {
+            EndGame();
+        }
 
         if(gameStarted) {
             timeWaited += Time.deltaTime;
@@ -138,7 +143,7 @@ public class GameManager : MonoBehaviour {
         teammateDownIndicator.SetActive(false);
         
         StatAssessment();
-        
+        ActivateEndUI();
     }
 
     // Creates an animation that animates the shooting of kills
@@ -148,7 +153,7 @@ public class GameManager : MonoBehaviour {
         target.GetComponent<Target>().RemoveSoul();
         target.GetComponent<Target>().Revive();
 
-        ActivateEndUI();
+        
     }
 
     public void ImDead(){
@@ -160,7 +165,6 @@ public class GameManager : MonoBehaviour {
         deathScream.clip = deadScream;
         deathScream.PlayDelayed(0.0f);
         EndGame();
-        ActivateEndUI();
     }
 
     public void RestartGame(){
@@ -259,6 +263,11 @@ public class GameManager : MonoBehaviour {
             }
         }
         return count;
+    }
+
+    private int CountExpired()
+    {
+        return targets.Where(o => o.GetComponent<Target>().isRespawned && o.GetComponent<Target>().isDead).Count();
     }
 
     private void RequestBanner(){
